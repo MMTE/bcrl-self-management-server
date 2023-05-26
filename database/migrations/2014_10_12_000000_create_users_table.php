@@ -21,11 +21,9 @@ return new class extends Migration {
             $table->json('reminders')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
-            $table->string('status')->default('active');
-
+            $table->string('status')->default('disabled');
             // user  -  admin
-            $table->string('role')->default('admin');
-
+            $table->string('role')->default('user');
             $table->timestamps();
         });
     }
