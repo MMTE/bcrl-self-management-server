@@ -20,5 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
+    if (Auth::check()) {
+        return;
+    }
     return view('login');
 });
