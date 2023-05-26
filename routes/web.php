@@ -16,17 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Jalalian;
 
 Route::get('/', function () {
-
-});
-
-Route::get('/test', function () {
-
-    $recipient = auth()->user();
-
-    Notification::make()
-        ->title('Saved successfully')
-        ->broadcast($recipient);
-
+    return view('home');
 });
 
 Route::get('/login', function () {
