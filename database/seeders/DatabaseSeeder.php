@@ -18,9 +18,15 @@ class DatabaseSeeder extends Seeder
         // create default setting fields for feedback
         $setting = new Setting();
         $setting->key = 'feedback_activation_status';
-        $setting->value = 'feedback_activation_users';
+        $setting->value = '';
         $setting->save();
 
+        $setting = new Setting();
+        $setting->key = 'feedback_activation_status';
+        $setting->value = '';
+        $setting->save();
+
+        // create default exercises
         $setting = new Setting();
         $setting->key = 'ماساژ لنفاوی';
         $setting->value = 'massage';
