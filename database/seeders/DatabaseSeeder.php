@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Exercise;
+use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // create default setting fields for feedback
+        $setting = new Setting();
+        $setting->key = 'feedback_activation_status';
+        $setting->value = 'feedback_activation_users';
+        $setting->save();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $setting = new Setting();
+        $setting->key = 'ماساژ لنفاوی';
+        $setting->value = 'massage';
+        $setting->save();
+
+        $exercise = new Exercise();
+        $exercise->name = 'بانداژ';
+        $exercise->slug = 'bandage';
+        $exercise->save();
+
+        $exercise = new Exercise();
+        $exercise->name = 'ورزش';
+        $exercise->slug = 'exercise';
+        $exercise->save();
+
+        $exercise = new Exercise();
+        $exercise->name = 'مراقبت از پوست';
+        $exercise->slug = 'skin-care';
+        $exercise->save();
     }
 }
