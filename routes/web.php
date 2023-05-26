@@ -20,8 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    $user = \App\Models\User::first();
-    \Illuminate\Support\Facades\Auth::login($user);
+    return view('login');
 });
-
-
