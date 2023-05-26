@@ -22,17 +22,16 @@
                             </div>
                             <div class="mt-2 sm:mt-3">
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <button type="submit"
-                                            class="block w-full rounded-md bg-pink-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
+                                    <a href="https://app.bcrlselfmanagement.ir/" class="text-center block w-full rounded-md bg-pink-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
                                         ورود به نسخه وب اپلیکیشن (iOS)
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-12 lg:block"><img class=""
-                                                            src="/images/mockup-min.png"
-                                                            alt=""/></div>
+                                                     src="/images/mockup-min.png"
+                                                     alt=""/></div>
                 </div>
             </div>
         </div>
