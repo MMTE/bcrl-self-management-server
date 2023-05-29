@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $setting->save();
 
         // create default exercises
-        $setting = new Setting();
+        $setting = new Exercise();
         $setting->key = 'ماساژ لنفاوی';
         $setting->value = 'massage';
         $setting->save();

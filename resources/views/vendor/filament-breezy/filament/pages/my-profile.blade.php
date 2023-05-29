@@ -1,8 +1,8 @@
 <x-filament::page>
 
-    <x-filament-breezy::sections.personal-info/>
+{{--    <x-filament-breezy::sections.personal-info/>--}}
 
-    <x-filament::hr />
+{{--    <x-filament::hr />--}}
 
     <x-filament-breezy::sections.passwords/>
 

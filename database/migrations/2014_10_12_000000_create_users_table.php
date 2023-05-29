@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('status')->default('disabled');
-            // user  -  admin
+            // roles: [user,admin]
             $table->string('role')->default('user');
             $table->timestamps();
         });
