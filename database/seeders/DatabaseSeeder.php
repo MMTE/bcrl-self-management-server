@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
 
         // create default exercises
         $setting = new Exercise();
-        $setting->key = 'ماساژ لنفاوی';
-        $setting->value = 'massage';
+        $setting->name = 'ماساژ لنفاوی';
+        $setting->slug = 'massage';
         $setting->save();
 
         $exercise = new Exercise();
