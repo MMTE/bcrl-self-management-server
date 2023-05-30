@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\VerificationCode;
+use App\Repositories\LoginRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -30,7 +31,7 @@ class ShowLogin extends Component
     {
         $this->user = User::where('phone', $this->phone)->first();
 
-        if ($this->status === null) {
+        if ($this->status == null) {
 
             if (!$this->user) {
                 $this->user = new User();
@@ -38,7 +39,7 @@ class ShowLogin extends Component
                 $this->user->save();
             }
 
-            if ($this->user->status === 'disabled') {
+            if ($this->user->status == 'disabled') {
                 return dd('your account is disabled. contact support for help.');
             }
 
@@ -46,7 +47,7 @@ class ShowLogin extends Component
 
             $this->status = 'verify';
 
-        } elseif ($this->status === 'verify') {
+        } elseif ($this->status == 'verify') {
             //check code
             $this->verifyCode();
         }
@@ -54,20 +55,13 @@ class ShowLogin extends Component
 
     public function sendCode()
     {
-
-        // note:: api key can be moved to env
-        $api_key = 'kh4ILpM4c_JfHgBBiPK8eTNKhKAno6_gvnBuYQG9O1I=';
-        $pattern_code = "g1t4zpsocl8nmdr";
-        $fphone = '009810004223';
         $login_code = random_int(1000, 9999);
-
-        $response = Http::get("http://ippanel.com:8080/?apikey=" . $api_key . "&pid=" . $pattern_code . "&fnum=" . $fphone . "&tnum=" . $this->phone . "&p1=verification-code&v1=" . $login_code);
+        LoginRepo::sendVerificationSMS($login_code, $this->phone);
 
         $verification_code = new VerificationCode();
         $verification_code->phone = $this->phone;
         $verification_code->code = $login_code;
         $verification_code->save();
-
     }
 
     public function verifyCode()

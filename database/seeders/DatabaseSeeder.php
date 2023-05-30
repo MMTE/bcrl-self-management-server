@@ -46,5 +46,14 @@ class DatabaseSeeder extends Seeder
         $exercise->name = 'مراقبت از پوست';
         $exercise->slug = 'skin-care';
         $exercise->save();
+
+        // create admin user
+        $user = new User();
+        $user->first_name = '';
+        $user->last_name = 'ادمین';
+        $user->phone = '09210418717';
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
     }
 }

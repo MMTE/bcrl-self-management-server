@@ -33,7 +33,7 @@ class FeedbackController extends Controller
 
         $is_activated = false;
 
-        if ($feedback_activation_status->value === "active_for_all_users" || $feedback_activation_status->value === "active_for_specific_users" && in_array($id, $feedback_activation_users->value)) {
+        if ($feedback_activation_status->value == "active_for_all_users" || $feedback_activation_status->value === "active_for_specific_users" && in_array($id, $feedback_activation_users->value)) {
             $is_activated = true;
         }
 

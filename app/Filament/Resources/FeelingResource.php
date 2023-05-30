@@ -21,14 +21,10 @@ use Morilog\Jalali\Jalalian;
 class FeelingResource extends Resource
 {
     protected static ?string $model = Feeling::class;
-
     protected static ?string $modelLabel = 'خلق و خو';
-
     protected static ?string $pluralModelLabel = 'خلق و خو';
     protected static ?string $navigationGroup = 'خلق و خو';
-
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-check';
-
 
     public static function form(Form $form): Form
     {
@@ -41,13 +37,7 @@ class FeelingResource extends Resource
     public static function table(Table $table): Table
     {
 
-        $status_translations = [
-            1 => 'خیلی خوبم 😍',
-            2 => ' خوبم 😊',
-            3 => 'بد نیستم 🙂',
-            4 => 'بد 🤢',
-            5 => 'خیلی بد 🤮'
-        ];
+        $status_translations = Feeling::STATUS_TRANSLATIONS;
 
         return $table
             ->columns([
@@ -64,7 +54,8 @@ class FeelingResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+//                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -82,6 +73,7 @@ class FeelingResource extends Resource
     {
         return [
             'index' => Pages\ListFeelings::route('/'),
+            'view' => Pages\ViewFeeling::route('/{record}'),
             'create' => Pages\CreateFeeling::route('/create'),
             'edit' => Pages\EditFeeling::route('/{record}/edit'),
         ];

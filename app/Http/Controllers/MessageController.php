@@ -18,14 +18,14 @@ class MessageController extends Controller
 
         $type = $request->get('type');
 
-        if ($type === 'support') {
+        if ($type == 'support') {
             $messages = Message::latest()
                 ->where('type', $type)
                 ->where(function ($query) use ($user) {
                     $query->where('user_id', $user->id)
                         ->orWhere('recipient_id', $user->id);
                 })->paginate(20);
-        } elseif ($type === 'group') {
+        } elseif ($type == 'group') {
             $messages = Message::latest()->where('type', $type)->paginate(20);
         }
 

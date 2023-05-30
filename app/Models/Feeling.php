@@ -9,6 +9,13 @@ class Feeling extends Model
 {
     use HasFactory;
 
+    const STATUS_TRANSLATIONS = [
+        1 => 'خیلی خوبم 😍',
+        2 => ' خوبم 😊',
+        3 => 'بد نیستم 🙂',
+        4 => 'بد 🤢',
+        5 => 'خیلی بد 🤮'
+    ];
 
     public function user()
     {

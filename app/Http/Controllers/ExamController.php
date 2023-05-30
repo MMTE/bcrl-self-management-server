@@ -16,7 +16,7 @@ class ExamController extends Controller
         $exams = Exam::where('status', 'active_for_all_users')->orWhere('status', 'active_for_specific_users')->get();
 
         foreach ($exams as $exam) {
-            if ($exam->status === 'active_for_specific_users' && !in_array($id, $exam->activated_users)) {
+            if ($exam->status == 'active_for_specific_users' && !in_array($id, $exam->activated_users)) {
                 continue;
             }
             $exam->questions = \App\Models\Question::whereIn('id', $exam->questions)->get();

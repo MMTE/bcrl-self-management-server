@@ -39,7 +39,7 @@ class ReportController extends Controller
             '۴۰ سانت' => 'ARM_40cm',
         ];
 
-        if ($type === 'exercise') {
+        if ($type == 'exercise') {
 
             if ($duration == 'هفته') {
                 $user_exercises = ExerciseUser::with('exercise')
@@ -88,7 +88,7 @@ class ReportController extends Controller
                 $data[$key] = $user_exercise->count();
             }
 
-        } else if ($type === 'arm') {
+        } else if ($type == 'arm') {
 
             if ($duration == 'هفته') {
                 $m = Measuring::whereBetween('created_at', [Carbon::now()->subWeek()->startOfWeek(weekStartsAt: Carbon::SATURDAY), Carbon::now()])
@@ -150,7 +150,7 @@ class ReportController extends Controller
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             }
-        } else if ($type === 'mood') {
+        } else if ($type == 'mood') {
             if ($duration == 'هفته') {
                 $moods = \App\Models\Feeling::whereBetween('created_at', [Carbon::now()->subWeek()->startOfWeek(weekStartsAt: Carbon::SATURDAY), Carbon::now()])
                     ->where('user_id', Auth::id())
@@ -233,7 +233,7 @@ class ReportController extends Controller
 
         $data = $report->data;
 
-        if ($type === 'feedback') {
+        if ($type == 'feedback') {
             $data['feedbacks'] = $request->get('feedbacks');
             $data['goal'] = $request->get('goal');
         } else {

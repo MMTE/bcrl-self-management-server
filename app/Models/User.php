@@ -59,13 +59,19 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return $this->role === 'admin';
+        return $this->role == 'admin';
     }
 
 
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+
+    public function Feelings()
+    {
+        return $this->hasMany(Feeling::class);
     }
 
 //    public function supportMessages()
