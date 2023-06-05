@@ -49,6 +49,16 @@ class User extends Authenticatable implements FilamentUser
         'reminders' => 'array',
     ];
 
+    const DAYS = [
+        0 => 'شنبه',
+        1 => 'یک‌شنبه',
+        2 => 'دوشنبه',
+        3 => 'سه‌شنبه',
+        4 => 'چهار‌شنبه',
+        5 => 'پنج‌شنبه',
+        6 => 'جمعه',
+    ];
+
     protected function name(): Attribute
     {
         return Attribute::make(

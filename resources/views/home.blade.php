@@ -10,14 +10,14 @@
                                 <span class="block text-pink-500">دستیار  </span><span class="block text-black">خودمدیریتی ادم لنفاوی</span>
                             </h1>
                             <p class="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                                اینجا از مراقبت و پیشگیری ادم لنفاوی
+                                اینجا درباره مراقبت و پیشگیری ادم لنفاوی
                                 بیشتر یاد می‌گیریم!</p>
                             <div class="mt-10 sm:mt-12">
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <button type="submit"
-                                            class="block w-full rounded-md bg-pink-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
-                                        دانلود اپلیکیشن
-                                    </button>
+                                    <a href="https://lymphedema-app.s3.ir-thr-at1.arvanstorage.ir/ادم-لنفاوی.apk" type="submit"
+                                            class="text-center block w-full rounded-md bg-pink-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
+                                        دانلود نسخه اندروید اپلیکیشن
+                                    </a>
                                 </div>
                             </div>
                             <div class="mt-2 sm:mt-3">

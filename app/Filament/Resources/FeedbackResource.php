@@ -7,12 +7,15 @@ use App\Filament\Resources\FeedbackResource\RelationManagers;
 use App\Helpers\Utility;
 use App\Models\Feedback;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Morilog\Jalali\Jalalian;
 
@@ -28,13 +31,6 @@ class FeedbackResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-check';
     protected static ?int $navigationSort = 10;
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
 
     public static function table(Table $table): Table
     {

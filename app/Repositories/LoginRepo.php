@@ -19,4 +19,18 @@ class LoginRepo
 
         return $res->json();
     }
+
+    public static function sendReminderSMS($receptor)
+    {
+        $api_key = env('KAVENEGAR_API_KEY');
+
+        $res = Http::get('https://api.kavenegar.com/v1/' . $api_key . '/verify/lookup.json',
+            [
+                "receptor" => $receptor,
+                "token" => '.',
+                "template" => 'reminder',
+            ]);
+
+        return $res->json();
+    }
 }

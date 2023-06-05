@@ -5,6 +5,7 @@ use App\Models\Exam;
 use App\Models\ExerciseUser;
 use App\Models\Measuring;
 use App\Models\Setting;
+use App\Models\SmsLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
@@ -25,9 +26,6 @@ Route::get('/login-user/{user}', function ($user) {
 });
 
 Route::get('/test', function () {
-
-
-
 });
 
 Route::get('/login', function () {

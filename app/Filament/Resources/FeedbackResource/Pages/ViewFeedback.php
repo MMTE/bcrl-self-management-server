@@ -4,6 +4,7 @@ namespace App\Filament\Resources\FeedbackResource\Pages;
 
 use App\Filament\Resources\FeedbackResource;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions;
 use Filament\Resources\Form;
@@ -19,7 +20,12 @@ class ViewFeedback extends ViewRecord
     {
         return $form
             ->schema([
-                TextInput::make('text')->label('یادداشت'),
+                Repeater::make('data')->schema([
+                    TextInput::make('question')->label('سؤال'),
+                    Repeater::make('options')->schema([
+                        TextInput::make('value')->label(''),
+                    ]),
+                ]),
             ]);
     }
 
