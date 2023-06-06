@@ -14,10 +14,7 @@
                                 بیشتر یاد می‌گیریم!</p>
                             <div class="mt-10 sm:mt-12">
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <a href="https://lymphedema-app.s3.ir-thr-at1.arvanstorage.ir/ادم-لنفاوی.apk" type="submit"
-                                            class="text-center block w-full rounded-md bg-pink-500 py-3 px-4 font-medium text-white shadow hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
-                                        دانلود نسخه اندروید اپلیکیشن
-                                    </a>
+                                    <livewire:download-app />
                                 </div>
                             </div>
                             <div class="mt-2 sm:mt-3">

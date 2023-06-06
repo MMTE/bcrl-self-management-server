@@ -2,7 +2,10 @@
     <div class="mx-auto md:w-full md:max-w-md">
         <div class="flex flex-col bg-white shadow w-full rounded-lg">
             <div class="p-10">
-                @if($status=== null)
+                @error('phone') <span class="text-red-400 error">{{ $message }}</span> @enderror
+
+
+            @if($status=== null)
                     <label class="font-semibold text-sm text-gray-600 pb-1 block">موبایل</label>
                     <input wire:model="phone" type="tel"
                            class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>

@@ -13,7 +13,6 @@ class ExerciseUserController extends Controller
     public function store(Request $request)
     {
         $slug = $request->get('slug');
-        Log::info($slug);
         $exercise = Exercise::where('slug', $slug)->first();
 
         if (!$exercise) {

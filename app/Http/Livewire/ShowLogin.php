@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\Utility;
 use App\Models\User;
 use App\Models\VerificationCode;
 use App\Repositories\LoginRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ShowLogin extends Component
@@ -21,6 +23,9 @@ class ShowLogin extends Component
     public $code;
     public $status;
     public $user;
+    protected $rules = [
+        'phone' => 'required|numeric',
+    ];
 
     public function mount()
     {
@@ -29,6 +34,13 @@ class ShowLogin extends Component
 
     public function submit()
     {
+        $this->phone = Utility::convertPersianNumbersToEnglish($this->phone);
+        $this->validate();
+
+        if (Str::length($this->phone) < 11) {
+            $this->addError('phone', 'لطفا شماره موبایل را درست وارد کنید.مثلا ۰۹۱۲۲۲۳۳۴۴۴');
+        }
+
         $this->user = User::where('phone', $this->phone)->first();
 
         if ($this->status == null) {
@@ -37,10 +49,7 @@ class ShowLogin extends Component
                 $this->user = new User();
                 $this->user->phone = $this->phone;
                 $this->user->save();
-            }
-
-            if ($this->user->status == 'disabled') {
-                return dd('your account is disabled. contact support for help.');
+                return $this->addError('phone', 'اکانت کاربری شما فعال نشده است. از ادمین بخواهید تا اکانت شما را فعال کند تا بتوانید وارد شوید.');
             }
 
             $this->sendCode();
@@ -66,6 +75,7 @@ class ShowLogin extends Component
 
     public function verifyCode()
     {
+        $this->code = Utility::convertPersianNumbersToEnglish($this->code);
 
         $code = $this->code;
         $phone = $this->phone;
@@ -76,7 +86,7 @@ class ShowLogin extends Component
             Auth::login($this->user);
             return redirect('/admin');
         } else {
-            return dd('کد ورود اشتباه است.');
+            return $this->addError('phone', 'کد ورود اشتباه است!');
         }
 
     }
