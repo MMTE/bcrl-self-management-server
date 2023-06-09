@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Utility;
 use App\Models\User;
 use App\Models\VerificationCode;
 use App\Repositories\LoginRepo;
@@ -14,8 +15,9 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $phone = $request->get('phone');
-        $user = User::where('phone', $phone)->first();
+        $phone = Utility::convertPersianNumbersToEnglish($phone);
 
+        $user = User::where('phone', $phone)->first();
         if (!$user) {
             $user = User::create([
                 'phone' => $phone,
@@ -27,16 +29,9 @@ class LoginController extends Controller
             return $this->handleError('your account is disabled. contact support for help.', 403);
         }
 
-        // note:: api key can be moved to env
-        // mediana
-        //        $api_key = '';
-        //        $pattern_code = "g1t4zpsocl8nmdr";
-        //        $fphone = '009810004223';
-
         $login_code = random_int(1000, 9999);
 
         if (!$request->has('is_verification')) {
-
             LoginRepo::sendVerificationSMS($login_code, $phone);
 
             $verification_code = new VerificationCode();
@@ -54,9 +49,13 @@ class LoginController extends Controller
         } else {
 
             $code = $request->get('code');
+            $code = Utility::convertPersianNumbersToEnglish($code);
+
             $first_name = $request->get('first_name');
             $last_name = $request->get('last_name');
+
             $age = $request->get('age');
+            $age = Utility::convertPersianNumbersToEnglish($age);
 
             $verification_code = VerificationCode::where('phone', $phone)->where('code', $code)->latest()->first();
 
