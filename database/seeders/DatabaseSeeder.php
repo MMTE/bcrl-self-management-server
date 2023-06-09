@@ -22,15 +22,21 @@ class DatabaseSeeder extends Seeder
         $setting->save();
 
         $setting = new Setting();
-        $setting->key = 'feedback_activation_status';
+        $setting->key = 'feedback_activation_users';
         $setting->value = '';
         $setting->save();
 
+        /*
+         *
+         *
+         *
+         */
+
         // create default exercises
-        $setting = new Exercise();
-        $setting->name = 'ماساژ لنفاوی';
-        $setting->slug = 'massage';
-        $setting->save();
+        $exercise = new Exercise();
+        $exercise->name = 'ماساژ لنفاوی';
+        $exercise->slug = 'massage';
+        $exercise->save();
 
         $exercise = new Exercise();
         $exercise->name = 'بانداژ';
@@ -47,6 +53,12 @@ class DatabaseSeeder extends Seeder
         $exercise->slug = 'skin-care';
         $exercise->save();
 
+        /*
+         *
+         *
+         *
+         */
+
         // create admin user
         $user = new User();
         $user->first_name = '';
@@ -55,5 +67,6 @@ class DatabaseSeeder extends Seeder
         $user->role = 'admin';
         $user->status = 'active';
         $user->save();
+
     }
 }

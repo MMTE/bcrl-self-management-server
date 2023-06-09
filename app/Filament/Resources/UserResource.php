@@ -28,6 +28,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('first_name')->label('نام'),
                 Forms\Components\TextInput::make('last_name')->label('نام خانوادگی'),
                 Forms\Components\TextInput::make('phone')->label('موبایل'),
+                Forms\Components\TextInput::make('age')->label('سن'),
                 Select::make('role')
                     ->label('نقش کاربری')
                     ->options([
@@ -56,6 +57,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('first_name')->label('نام')->sortable(),
                 Tables\Columns\TextColumn::make('last_name')->label('نام خانوادگی')->sortable(),
                 Tables\Columns\TextColumn::make('phone')->label('موبایل')->sortable(),
+                Tables\Columns\TextColumn::make('age')->label('سن')->sortable(),
                 Tables\Columns\TextColumn::make('role')->label('نفش کاربری')->sortable(),
             ])
             ->filters([
@@ -81,8 +83,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'view' => Pages\ViewUser::route('/{record}'),
             'create' => Pages\CreateUser::route('/create'),
+            'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }

@@ -21,7 +21,4 @@ class ExerciseUser extends Model
     {
         return $this->belongsTo(Exercise::class);
     }
-
-
-
 }

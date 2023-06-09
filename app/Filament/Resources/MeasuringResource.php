@@ -71,8 +71,8 @@ class MeasuringResource extends Resource
     {
         return [
             'index' => Pages\ListMeasurings::route('/'),
-            'view' => Pages\ViewMeasuring::route('/{record}'),
             'create' => Pages\CreateMeasuring::route('/create'),
+            'view' => Pages\ViewMeasuring::route('/{record}'),
             'edit' => Pages\EditMeasuring::route('/{record}/edit'),
         ];
     }

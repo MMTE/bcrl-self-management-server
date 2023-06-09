@@ -54,8 +54,7 @@ class FeelingResource extends Resource
                 //
             ])
             ->actions([
-//                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()->url(fn(Model $record): string => FeelingResource::getUrl('view', $record)),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -73,8 +72,8 @@ class FeelingResource extends Resource
     {
         return [
             'index' => Pages\ListFeelings::route('/'),
-            'view' => Pages\ViewFeeling::route('/{record}'),
             'create' => Pages\CreateFeeling::route('/create'),
+            'view' => Pages\ViewFeeling::route('/{record}'),
             'edit' => Pages\EditFeeling::route('/{record}/edit'),
         ];
     }

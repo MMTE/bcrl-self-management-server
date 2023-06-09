@@ -32,6 +32,7 @@ class LoginController extends Controller
         //        $api_key = '';
         //        $pattern_code = "g1t4zpsocl8nmdr";
         //        $fphone = '009810004223';
+
         $login_code = random_int(1000, 9999);
 
         if (!$request->has('is_verification')) {
@@ -43,13 +44,33 @@ class LoginController extends Controller
             $verification_code->code = $login_code;
             $verification_code->save();
 
-            return $this->handleResponse(null, 'login sms code sent to user successfully.');
+            return $this->handleResponse(
+                [
+                    'ask_for_name' => (empty($user->first_name) && empty($user->last_name)),
+                    'ask_for_age' => (empty($user->age)),
+                ]
+                , 'login sms code sent to user successfully.');
+
         } else {
+
             $code = $request->get('code');
+            $first_name = $request->get('first_name');
+            $last_name = $request->get('last_name');
+            $age = $request->get('age');
+
             $verification_code = VerificationCode::where('phone', $phone)->where('code', $code)->latest()->first();
 
             if ($verification_code) {
+
                 $token = $user->createToken(random_int(1, 10000))->plainTextToken;
+
+                if (!empty($first_name) || !empty($last_name)) {
+                    $user->first_name = $first_name;
+                    $user->last_name = $last_name;
+                    $user->age = $age;
+                    $user->save();
+                }
+
                 return $this->handleResponse([
                     'token' => $token
                 ], 'verification code was correct. security token has been attached.');
