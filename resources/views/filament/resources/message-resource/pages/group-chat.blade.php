@@ -9,7 +9,7 @@
 
                             <div
                                 class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($current_user_id)->name}}
+                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($message->user_id)->name}}
                                     :</p>
                                 <p class="text-xl">{{$message->text}}</p>
                             </div>
@@ -18,7 +18,7 @@
                         <div class="flex justify-end mb-4">
                             <div
                                 class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($current_user_id)->name}}
+                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($message->user_id)->name}}
                                     :</p>
                                 <p class="text-xl">{{$message->text}}</p>
                             </div>
