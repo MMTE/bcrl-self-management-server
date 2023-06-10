@@ -40,7 +40,7 @@ class ExerciseUserResource extends Resource
                 TextColumn::make('user.name')->label('کاربر'),
                 TextColumn::make('exercise.name')->label('تمرین'),
                 TextColumn::make('c_created_at')->label('تاریخ انجام')
-                    ->default(fn(ExerciseUser $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))),
+                    ->default(fn(ExerciseUser $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))),
             ])
             ->filters([
                 //

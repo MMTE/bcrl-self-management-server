@@ -5,7 +5,7 @@
 @foreach($record->user->feelings as $feeling)
     <div class="mt-5">
         <h2 class="font-bold text-xl mb-5">
-            <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))}}</span>
+            <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))}}</span>
         </h2>
         <div class="flex flex-col mb-4">
             <div class="flex flex-row content-center">

@@ -3,12 +3,12 @@
 <div class="mt-5">
     <div class="flex">
         <h2 class="font-bold ml-2">تاریخ ثبت:</h2>
-        <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))}}</span>
+        <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))}}</span>
     </div>
     @if($record->created_at != $record->updated_at)
         <div class="flex mt-4">
             <h2 class="font-bold ml-2">تاریخ به روزرسانی:</h2>
-            <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->updated_at)->format('l d F Y - H:i:s'))}}</span>
+            <span>{{\App\Helpers\Utility::convertEnglishNumbersToPersian(\Morilog\Jalali\Jalalian::forge($record->updated_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))}}</span>
         </div>
     @endif
 </div>

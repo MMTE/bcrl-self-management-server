@@ -46,7 +46,7 @@ class FeelingResource extends Resource
                 Tables\Columns\TextColumn::make('c_feeling')->default(fn(Model $record): string => $status_translations[$record->feeling])->label('وضعیت')->sortable(),
 
                 TextColumn::make('c_created_at')->label('تاریخ انجام')
-                    ->default(fn(Feeling $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))),
+                    ->default(fn(Feeling $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))),
 
 
             ])

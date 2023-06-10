@@ -45,8 +45,8 @@ class MeasuringResource extends Resource
             ->columns([
                 TextColumn::make('user.name')->label('کاربر'),
                 TextColumn::make('c_created_at')->label('تاریخ ثبت')
-                    ->default(fn(Measuring $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))),
-                TextColumn::make('c_updated_at')->label('تاریخ به روزرسانی')->default(fn(Measuring $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->updated_at)->format('l d F Y - H:i:s'))),
+                    ->default(fn(Measuring $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))),
+                TextColumn::make('c_updated_at')->label('تاریخ به روزرسانی')->default(fn(Measuring $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->updated_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))),
             ])
             ->filters([
                 //

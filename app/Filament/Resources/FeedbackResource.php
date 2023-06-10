@@ -38,7 +38,7 @@ class FeedbackResource extends Resource
             ->columns([
                 TextColumn::make('user.name')->label('کاربر'),
                 TextColumn::make('c_created_at')->label('تاریخ ثبت')
-                    ->default(fn(Feedback $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at)->format('l d F Y - H:i:s'))),
+                    ->default(fn(Feedback $record): string => Utility::convertEnglishNumbersToPersian(Jalalian::forge($record->created_at,new \DateTimeZone('Asia/Tehran'))->format('l d F Y - H:i:s'))),
             ])
             ->filters([
                 //

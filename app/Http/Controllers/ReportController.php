@@ -108,7 +108,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             } else if ($duration == 'ماهانه') {
@@ -116,7 +116,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             } else if ($duration == 'دو ماه') {
@@ -124,7 +124,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             } else if ($duration == 'سه ماه') {
@@ -132,7 +132,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             } else if ($duration == 'چهار ماه') {
@@ -140,13 +140,13 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             } else if ($duration == 'از ابتدا تا اکنون') {
                 $m = Measuring::where('user_id', Auth::id())->get();
                 foreach ($m as $item) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($item->updated_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = abs($item->measurements[$revers_translation[$selectedArm]]['right'] - $item->measurements[$revers_translation[$selectedArm]]['left']);
                 }
             }
@@ -156,7 +156,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'دو هفته') {
@@ -164,7 +164,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'ماهانه') {
@@ -172,7 +172,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'دو ماه') {
@@ -180,7 +180,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'سه ماه') {
@@ -188,7 +188,7 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'چهار ماه') {
@@ -196,14 +196,14 @@ class ReportController extends Controller
                     ->where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             } else if ($duration == 'از ابتدا تا اکنون') {
                 $moods = Feeling::where('user_id', Auth::id())
                     ->get();
                 foreach ($moods as $mood) {
-                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at)->format('d M'));
+                    $date = Utility::convertEnglishNumbersToPersian(Jalalian::forge($mood->created_at,new \DateTimeZone('Asia/Tehran'))->format('d M'));
                     $data[$date] = $mood->feeling;
                 }
             }

@@ -1,7 +1,8 @@
 <x-filament::page>
     <h1 class="text-2xl">گفتگو با <span class="font-bold">{{$user->name}}</span></h1>
     <div class="flex flex-col max-h-screen">
-        <div class="flex-grow overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch">
+        <div
+            class="flex-grow overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch">
             <div class="flex flex-col">
                 @foreach($messages as $message)
                     @if($current_user_id === $message->user_id)
@@ -9,14 +10,18 @@
                             <div
                                 class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
                             >
-                                {{$message->text}}
-                            </div>
+                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($current_user_id)->name}}
+                                    :</p>
+                                <p class="text-xl">{{$message->text}}</p></div>
                         </div>
                     @else
                         <div class="flex justify-end mb-4">
                             <div
                                 class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
-                            >{{$message->text}}</div>
+                            >
+                                <p class="text-sm mb-2 text-black">{{\App\Models\User::find($current_user_id)->name}}:</p>
+                                <p class="text-xl">{{$message->text}}</p>
+                            </div>
                         </div>
                     @endif
                 @endforeach
