@@ -43,7 +43,10 @@ class NoteController extends Controller
     {
         $note_id = $request->get('note_id');
         $note = Note::find($note_id);
-        $note->delete();
+
+        if (Auth::id() === $note->user_id) {
+            $note->delete();
+        }
 
         return $this->handleResponse(null, 'note deleted successfully');
     }

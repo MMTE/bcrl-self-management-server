@@ -23,18 +23,20 @@ class SettingsPage extends Page
     public $feedback_activation_users;
 
 
-    public function mount(): void
+    public function mount()
     {
-        $this->feedback_activation_status = Setting::where('key', 'feedback_activation_status')->first();
-        $this->feedback_activation_users = Setting::where('key', 'feedback_activation_users')->first();
-    }
+        $feedback_activation_status = Setting::where('key', 'feedback_activation_status')->first();
+        $feedback_activation_users = Setting::where('key', 'feedback_activation_users')->first();
 
+        $this->feedback_activation_status = $feedback_activation_status->value;
+        $this->feedback_activation_users = $feedback_activation_users->value;
+    }
 
     protected function getFormSchema(): array
     {
         return [
 
-            Select::make('feedback_activation_status.value')
+            Select::make('feedback_activation_status')
                 ->label('وضعیت انتشار بخش نظرسنجی')
                 ->options([
                     'active_for_all_users' => 'فعال برای همه کاربران',
@@ -44,19 +46,29 @@ class SettingsPage extends Page
                 ->reactive()
                 ->preload(),
 
-            Select::make('feedback_activation_users.value')
+            Select::make('feedback_activation_users')
                 ->label('کاربرانی که نظرسنجی برای آن‌ها فعال شده است')
                 ->label('کاربران')
                 ->multiple()
-                ->hidden(fn(Closure $get) => $get('feedback_activation_status.value') !== 'active_for_specific_users')
-                ->options(User::all()->pluck('name', 'id')),];
+                ->hidden(fn(Closure $get) => $get('feedback_activation_status') !== 'active_for_specific_users')
+                ->options(User::all()->pluck('name', 'id'))
+                ->preload(),
+        ];
 
     }
 
     public function submit(): void
     {
-        $this->feedback_activation_status->save();
-        $this->feedback_activation_users->save();
+
+        $feedback_activation_status = Setting::where('key', 'feedback_activation_status')->first();
+        $feedback_activation_users = Setting::where('key', 'feedback_activation_users')->first();
+
+        $feedback_activation_status->value = $this->feedback_activation_status;
+        $feedback_activation_users->value = $this->feedback_activation_users;
+
+        $feedback_activation_status->save();
+        $feedback_activation_users->save();
+
         Notification::make()
             ->title('با موفقیت ذخیره شد!')
             ->icon('heroicon-o-cog')

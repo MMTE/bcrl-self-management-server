@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reminders', [ReminderController::class, 'store']);
     Route::get('/messages', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
+    Route::delete('/messages', [MessageController::class, 'delete']);
+    Route::put('/messages', [MessageController::class, 'put']);
     Route::post('/feedbacks', [FeedbackController::class, 'store']);
     Route::get('/feedbacks/status', [FeedbackController::class, 'status']);
     Route::post('/exams', [ExamController::class, 'store']);
@@ -42,8 +44,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // websocket on server
 // websocket on client
-// fix chat from panel
-// mood chart
-// arm charts options
-// pictures and graphics
-// checking weekly status updates

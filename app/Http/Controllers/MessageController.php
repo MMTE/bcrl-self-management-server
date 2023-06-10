@@ -56,4 +56,29 @@ class MessageController extends Controller
 
         return $this->handleResponse(null, 'message stored successfully.');
     }
+
+
+    public function delete(Request $request)
+    {
+        $message_id = $request->get('message_id');
+        $message = Message::find($message_id);
+        if (Auth::id() === $message->user_id) $message->delete();
+
+        return $this->handleResponse(null, 'message deleted successfully');
+    }
+
+    public function put(Request $request)
+    {
+        $message_id = $request->get('message_id');
+        $text = $request->get('text');
+
+        $message = Message::find($message_id);
+        if (Auth::id() === $message->user_id) {
+            $message->text = $text;
+            $message->save();
+        }
+
+        return $this->handleResponse(null, 'message updated successfully');
+    }
+
 }
