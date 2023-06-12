@@ -22,6 +22,7 @@ class ChatPage extends Page
     public $current_user_id;
     public $messages;
     public $input;
+    public $deleting_id;
 
     protected $listeners = ['messagesSend' => 'getMessages'];
 
@@ -57,4 +58,23 @@ class ChatPage extends Page
         $message->save();
     }
 
+    public function deleteMessage()
+    {
+        $message = Message::find($this->deleting_id);
+        if ($message) {
+            $message->delete();
+        }
+        $this->deleting_id = null;
+        $this->getMessages();
+    }
+
+    public function showDeleteModal($message_id)
+    {
+        $this->deleting_id = $message_id;
+    }
+
+    public function cancelDelete()
+    {
+        $this->deleting_id = null;
+    }
 }

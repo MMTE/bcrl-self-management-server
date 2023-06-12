@@ -21,40 +21,46 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->call(function () {
-            // get all users
-            $users = User::all();
-            // iterate users and send their reminders
+            $users = User::whereNotNull('reminders')->get();
+
             foreach ($users as $user) {
-                // check if user has set the reminder option
-                if ($user->reminders == null) continue;
-
                 $now = Carbon::now();
+
                 $days = $user->reminders['days'];
-                $hours = $user->reminders['hours'];
+                $reminderHours = $user->reminders['hours'];
+
                 $todayWeekDayNumber = Utility::getCarbonConstantInCustomStandard($now->weekday());
+                if (!in_array($todayWeekDayNumber, $days)) continue;
 
-                if (in_array($todayWeekDayNumber, $days)) {
-                    // today is reminder day
-                    foreach ($hours as $hour) {
-                        // check if reminder is already sent
-                        $SmsLog = SmsLog::where('user_id', 2)->where('type', 'exercise-reminder')->first();
-                        if ($SmsLog && $SmsLog->details && ($SmsLog->details['reminder_hour'] == $hour)) continue; else {
+                foreach ($reminderHours as $reminder) {
 
-                            $t_hour = Carbon::make(new Carbon($hour))->setDate($now->year, $now->month, $now->day);
-                            // send reminder if it's the time
-                            if ($t_hour <= $now) {
-                                // send sms
-                                LoginRepo::sendReminderSMS($user->phone);
+                    $SmsLogs = SmsLog::where('user_id', 2)
+                        ->where('type', 'exercise-reminder')
+                        ->whereDate('created_at', $now->toDateString())
+                        ->get();
 
-                                // save the log
-                                $SmsLog = new SmsLog();
-                                $SmsLog->user_id = $user->id;
-                                $SmsLog->type = 'exercise-reminder';
-                                $SmsLog->details = ['reminder_hour' => $hour];
-                                $SmsLog->save();
-                            }
-                        }
+                    $already_sent = false;
+
+                    foreach ($SmsLogs as $SmsLog) {
+                        if ($SmsLog && $SmsLog->details && $SmsLog->details['reminder_hour'] == $reminder && $SmsLog->details['day'] == $todayWeekDayNumber) $already_sent = true;
                     }
+
+                    if ($already_sent) continue;
+
+                    $due_hour = Carbon::make(new Carbon($reminder))->setDate($now->year, $now->month, $now->day);
+
+                    if ($due_hour > $now) continue;
+                    if ($due_hour->diffInHours($now) >= 3) continue;
+
+                    SmsLog::create([
+                        'user_id' => $user->id,
+                        'type' => 'exercise-reminder',
+                        'details' => [
+                            'reminder_hour' => $reminder,
+                            'day' => $todayWeekDayNumber
+                        ]
+                    ]);
+                    LoginRepo::sendReminderSMS($user->phone);
                 }
             }
         })->everyMinute();

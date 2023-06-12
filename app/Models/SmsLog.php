@@ -9,7 +9,10 @@ class SmsLog extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'type', 'details'];
+
     protected $casts = [
         'details' => 'array',
     ];
+
 }

@@ -7,6 +7,7 @@ use App\Models\Measuring;
 use App\Models\Setting;
 use App\Models\SmsLog;
 use App\Models\User;
+use App\Repositories\LoginRepo;
 use Carbon\Carbon;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Filament\Notifications\Notification;

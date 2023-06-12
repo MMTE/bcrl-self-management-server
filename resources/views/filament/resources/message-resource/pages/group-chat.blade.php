@@ -3,15 +3,45 @@
         <div
             class="flex-grow overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch">
             <div class="flex flex-col">
+
+                @if($deleting_id)
+                    <div
+                        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+                    >
+                        <div class="mt-3 text-center">
+                            <div class="items-center px-4 py-3">
+                                <p class="text-black mb-10 ">از حذف پیام مطمئن هستید؟</p>
+                                <button
+                                    wire:click="cancelDelete"
+                                    id="ok-btn"
+                                    class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                                >
+                                    لغو
+                                </button>
+                                <button
+                                    wire:click="deleteMessage"
+                                    id="ok-btn"
+                                    class="mt-4 px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                                >
+                                    حذف
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 @foreach($messages as $message)
                     @if($current_user_id === $message->user_id)
                         <div class="flex justify-start mb-4">
-
                             <div
                                 class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                 <p class="text-sm mb-2 text-black">{{\App\Models\User::find($message->user_id)->name}}
                                     :</p>
                                 <p class="text-xl">{{$message->text}}</p>
+                                <button wire:click="showDeleteModal({{$message->id}})"
+                                        class="mt-4 text-[12px] bg-transparent hover:bg-gray-100 text-gray-800 py-1 px-1 border border-gray-400 rounded shadow">
+                                    حذف
+                                </button>
                             </div>
                         </div>
                     @else
@@ -21,6 +51,10 @@
                                 <p class="text-sm mb-2 text-black">{{\App\Models\User::find($message->user_id)->name}}
                                     :</p>
                                 <p class="text-xl">{{$message->text}}</p>
+                                <button wire:click="showDeleteModal({{$message->id}})"
+                                        class="mt-4 text-[12px] bg-transparent hover:bg-gray-100 text-gray-800 py-1 px-1 border border-gray-400 rounded shadow">
+                                    حذف
+                                </button>
                             </div>
                         </div>
                     @endif
