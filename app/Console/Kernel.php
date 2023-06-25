@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
                 $days = $user->reminders['days'];
                 $reminderHours = $user->reminders['hours'];
 
-                $todayWeekDayNumber = Utility::getCarbonConstantInCustomStandard($now->weekday());
+                $todayWeekDayNumber = Utility::getCarbonConstantInCustomStandard($now->setTimezone('Asia/Tehran')->weekday());
                 if (!in_array($todayWeekDayNumber, $days)) continue;
 
                 foreach ($reminderHours as $reminder) {
@@ -61,6 +61,11 @@ class Kernel extends ConsoleKernel
                         ]
                     ]);
                     LoginRepo::sendReminderSMS($user->phone);
+                    Http::post('https://api.pushover.net/1/messages.json', [
+                        'token' => 'ag5id77r2miivse7r7tnfwe6vz5eow',
+                        'user' => 'u2x8b62ws1eok9ofda8quvu6iyhueu',
+                        'message' => 'یادآوری ارسال شد برای ' . $user->phone,
+                    ]);
                 }
             }
         })->everyMinute();
