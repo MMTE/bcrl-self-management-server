@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
 
                 foreach ($reminderHours as $reminder) {
 
-                    $SmsLogs = SmsLog::where('user_id', 2)
+                    $SmsLogs = SmsLog::where('user_id', $user->id)
                         ->where('type', 'exercise-reminder')
                         ->whereDate('created_at', $now->toDateString())
                         ->get();
