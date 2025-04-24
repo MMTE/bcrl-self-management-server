@@ -10,11 +10,12 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
+      - ./db.sqlite:/var/www/db.sqlite
     ports:
       - "8000:8000"
     networks:
       - behdasht-network
-    command: php artisan serve --host=0.0.0.0
+    command: php artisan serve
 
 networks:
   behdasht-network:
