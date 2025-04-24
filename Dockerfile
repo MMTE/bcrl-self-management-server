@@ -29,14 +29,14 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
-# Install Node.js dependencies and build assets
-RUN npm install && npm run build
-
 # Make storage and bootstrap cache writable
 RUN chmod -R 775 storage bootstrap/cache
 
 # Install project dependencies
 RUN composer install
+
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
 
 # Generate application key
 RUN php artisan key:generate
