@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -24,6 +28,9 @@ WORKDIR /var/www
 
 # Copy existing application directory contents
 COPY . /var/www
+
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
 
 # Make storage and bootstrap cache writable
 RUN chmod -R 775 storage bootstrap/cache
