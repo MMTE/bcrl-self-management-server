@@ -29,7 +29,7 @@ COPY . /var/www
 RUN chmod -R 775 storage bootstrap/cache
 
 # Install project dependencies
-RUN composer install --no-interaction --no-dev
+RUN composer install
 
 # Generate application key
 RUN php artisan key:generate
