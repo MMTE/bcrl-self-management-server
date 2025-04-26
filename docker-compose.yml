@@ -10,12 +10,15 @@ services:
     working_dir: /var/www
     environment:
       - SERVICE_FQDN_behdasht_3000
-      - CACHE_DRIVER: file
-      - SESSION_DRIVER: file
-      - QUEUE_CONNECTION: sync
+      - CACHE_DRIVER=file
+      - SESSION_DRIVER=file
+      - QUEUE_CONNECTION=sync
     volumes:
       - ./storage:/var/www/storage
+      - ./bootstrap/cache:/var/www/bootstrap/cache
       - ./db.sqlite:/var/www/db.sqlite
+    ports:
+      - "8000:8000"
     networks:
       - behdasht-network
     command: php /var/www/artisan serve --host=0.0.0.0

@@ -59,14 +59,24 @@ COPY --from=build /app/vendor /var/www/vendor
 # Copy built assets from node stage
 COPY --from=node /app/public/build /var/www/public/build
 
+# Create storage structure
+RUN mkdir -p /var/www/storage/framework/cache/data \
+    && mkdir -p /var/www/storage/framework/sessions \
+    && mkdir -p /var/www/storage/framework/views \
+    && mkdir -p /var/www/bootstrap/cache
+
 # Make storage and bootstrap cache writable
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 775 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache
 
 # Ensure artisan is executable
 RUN chmod +x /var/www/artisan
 
 # Create minimal .env file
 RUN echo "APP_KEY=" > .env
+RUN echo "CACHE_DRIVER=file" >> .env
+RUN echo "SESSION_DRIVER=file" >> .env
+RUN echo "QUEUE_CONNECTION=sync" >> .env
 
 # Generate application key and run package discovery
 RUN php /var/www/artisan key:generate --force && php /var/www/artisan package:discover --ansi
