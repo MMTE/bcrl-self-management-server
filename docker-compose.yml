@@ -11,7 +11,8 @@ services:
     environment:
       - SERVICE_FQDN_behdasht_3000
       - KAVENEGAR_API_KEY: ${KAVENEGAR_API_KEY}
-
+      - DB_CONNECTION: sqlite
+      - DB_DATABASE: /var/www/db.sqlite
     volumes:
       - ./db.sqlite:/var/www/db.sqlite
 
