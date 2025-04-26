@@ -19,8 +19,8 @@ WORKDIR /app
 # Copy application code
 COPY . .
 
-# Install Composer dependencies
-RUN composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs
+# Install Composer dependencies with no scripts to avoid package discovery which requires Vite
+RUN composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
 
 FROM node:18 AS node
 
@@ -62,8 +62,8 @@ COPY --from=node /app/public/build /var/www/public/build
 # Make storage and bootstrap cache writable
 RUN chmod -R 775 storage bootstrap/cache
 
-# Generate application key
-RUN php artisan key:generate
+# Generate application key and run package discovery
+RUN php artisan key:generate --force && php artisan package:discover --ansi
 
 # Expose port 8000 for the application
 EXPOSE 8000
