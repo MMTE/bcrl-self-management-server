@@ -10,6 +10,7 @@ services:
     working_dir: /var/www
     environment:
       - SERVICE_FQDN_behdasht_3000
+      - KAVENEGAR_API_KEY: ${KAVENEGAR_API_KEY}
 
     volumes:
       - ./db.sqlite:/var/www/db.sqlite
