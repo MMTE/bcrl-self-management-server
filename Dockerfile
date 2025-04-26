@@ -1,4 +1,4 @@
-FROM composer:latest AS composer
+FROM composer:2-php8.2 AS composer
 
 WORKDIR /app
 COPY . .
@@ -51,4 +51,4 @@ RUN php artisan key:generate
 EXPOSE 8000
 
 # Set the entry point
-CMD ["php", "artisan", "serve", "--host=0.0.0.0"] 
+CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
