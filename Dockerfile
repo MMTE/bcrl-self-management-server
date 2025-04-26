@@ -1,17 +1,32 @@
-FROM composer:latest AS composer
+FROM php:8.1-cli AS build
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Set working directory
 WORKDIR /app
-COPY composer.json composer.lock ./
 
-# Add platform configuration to ensure compatibility
-RUN composer config platform.php 8.2.0 && \
-    composer install --no-interaction --no-dev --optimize-autoloader
+# Copy application code
+COPY . .
+
+# Install Composer dependencies
+RUN composer install --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs
 
 FROM node:18 AS node
 
 WORKDIR /app
 COPY . .
-COPY --from=composer /app/vendor /app/vendor
+COPY --from=build /app/vendor /app/vendor
 RUN npm install && npm run build
 
 FROM php:8.1-cli
@@ -38,8 +53,8 @@ WORKDIR /var/www
 # Copy application code
 COPY . /var/www
 
-# Copy vendor directory from composer stage
-COPY --from=composer /app/vendor /var/www/vendor
+# Copy vendor directory from build stage
+COPY --from=build /app/vendor /var/www/vendor
 
 # Copy built assets from node stage
 COPY --from=node /app/public/build /var/www/public/build
