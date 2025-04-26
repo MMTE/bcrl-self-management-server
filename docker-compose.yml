@@ -11,8 +11,6 @@ services:
     volumes:
       - ./:/var/www
       - ./db.sqlite:/var/www/db.sqlite
-    ports:
-      - "8000:8000"
     networks:
       - behdasht-network
     command: php artisan serve
