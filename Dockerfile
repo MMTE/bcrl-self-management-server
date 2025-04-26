@@ -1,4 +1,4 @@
-FROM composer:2-php8.2 AS composer
+FROM composer:latest AS composer
 
 WORKDIR /app
 COPY composer.json composer.lock ./
