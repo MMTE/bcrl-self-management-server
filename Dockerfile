@@ -66,10 +66,10 @@ RUN chmod -R 775 storage bootstrap/cache
 RUN echo "APP_KEY=" > .env
 
 # Generate application key and run package discovery
-RUN php artisan key:generate --force && php artisan package:discover --ansi
+RUN php /var/www/artisan key:generate --force && php /var/www/artisan package:discover --ansi
 
 # Expose port 8000 for the application
 EXPOSE 8000
 
 # Set the entry point
-CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
+CMD ["php", "/var/www/artisan", "serve", "--host=0.0.0.0"]
