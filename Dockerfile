@@ -62,6 +62,9 @@ COPY --from=node /app/public/build /var/www/public/build
 # Make storage and bootstrap cache writable
 RUN chmod -R 775 storage bootstrap/cache
 
+# Ensure artisan is executable
+RUN chmod +x /var/www/artisan
+
 # Create minimal .env file
 RUN echo "APP_KEY=" > .env
 
