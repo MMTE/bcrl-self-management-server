@@ -13,6 +13,7 @@ services:
       - KAVENEGAR_API_KEY: ${KAVENEGAR_API_KEY}
       - DB_CONNECTION: sqlite
       - DB_DATABASE: /var/www/db.sqlite
+      - APP_KEY: ${APP_KEY}
     volumes:
       - ./db.sqlite:/var/www/db.sqlite
 

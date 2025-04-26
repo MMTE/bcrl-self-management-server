@@ -73,13 +73,12 @@ RUN chmod -R 775 /var/www/storage \
 RUN chmod +x /var/www/artisan
 
 # Create minimal .env file
-RUN echo "APP_KEY=" > .env
-RUN echo "CACHE_DRIVER=file" >> .env
-RUN echo "SESSION_DRIVER=file" >> .env
-RUN echo "QUEUE_CONNECTION=sync" >> .env
-RUN echo "DB_CONNECTION=sqlite" >> .env
-RUN echo "DB_DATABASE=/var/www/db.sqlite" >> .env
-
+# RUN echo "APP_KEY=" > .env
+# RUN echo "CACHE_DRIVER=file" >> .env
+# RUN echo "SESSION_DRIVER=file" >> .env
+# RUN echo "QUEUE_CONNECTION=sync" >> .env
+# RUN echo "DB_CONNECTION=sqlite" >> .env
+# RUN echo "DB_DATABASE=/var/www/db.sqlite" >> .env
 
 # Generate application key and run package discovery
 RUN php /var/www/artisan key:generate --force && php /var/www/artisan package:discover --ansi
