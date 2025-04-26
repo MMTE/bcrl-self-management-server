@@ -10,12 +10,8 @@ services:
     working_dir: /var/www
     environment:
       - SERVICE_FQDN_behdasht_3000
-      - CACHE_DRIVER=file
-      - SESSION_DRIVER=file
-      - QUEUE_CONNECTION=sync
+
     volumes:
-      - ./storage:/var/www/storage
-      - ./bootstrap/cache:/var/www/bootstrap/cache
       - ./db.sqlite:/var/www/db.sqlite
 
     networks:
