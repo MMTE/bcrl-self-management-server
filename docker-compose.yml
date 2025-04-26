@@ -8,6 +8,8 @@ services:
     container_name: behdasht-app
     restart: unless-stopped
     working_dir: /var/www
+    environment:
+      - SERVICE_FQDN_behdasht_3000
     volumes:
       - ./:/var/www
       - ./db.sqlite:/var/www/db.sqlite
