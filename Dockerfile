@@ -62,6 +62,9 @@ COPY --from=node /app/public/build /var/www/public/build
 # Make storage and bootstrap cache writable
 RUN chmod -R 775 storage bootstrap/cache
 
+# Create minimal .env file
+RUN echo "APP_KEY=" > .env
+
 # Generate application key and run package discovery
 RUN php artisan key:generate --force && php artisan package:discover --ansi
 
