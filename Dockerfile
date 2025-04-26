@@ -1,8 +1,11 @@
 FROM composer:2-php8.2 AS composer
 
 WORKDIR /app
-COPY . .
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+COPY composer.json composer.lock ./
+
+# Add platform configuration to ensure compatibility
+RUN composer config platform.php 8.2.0 && \
+    composer install --no-interaction --no-dev --optimize-autoloader
 
 FROM node:18 AS node
 
