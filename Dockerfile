@@ -81,7 +81,7 @@ RUN chmod +x /var/www/artisan
 # RUN echo "DB_DATABASE=/var/www/db.sqlite" >> .env
 
 # Generate application key and run package discovery
-RUN php /var/www/artisan key:generate --force && php /var/www/artisan package:discover --ansi
+# RUN php /var/www/artisan key:generate --force && php /var/www/artisan package:discover --ansi
 
 # Expose port 8000 for the application
 EXPOSE 8000
